@@ -1,0 +1,6 @@
+# Ignore pycache and output files
+**/__pycache__/
+*.pyc
+*.txt
+*.err
+*.out

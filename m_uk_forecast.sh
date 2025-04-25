@@ -7,7 +7,7 @@
 #SBATCH --error=/home/users/avapps/uas/log.err
 
 # Define directories, files and issue date/time
-CODE_DIR=/home/users/avapps/uas
+CODE_DIR=/home/users/avapps/uas/UAS
 START_DATE_TIME=$(date -u -d '-3 hour' '+%Y%m%d%H')
 export USER=avapps
 export MOG_UK_DIR=/critical/opfc/suites-oper/uk/share/cycle
