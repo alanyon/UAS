@@ -2,9 +2,9 @@
 #SBATCH --qos=normal
 #SBATCH --mem=20G
 #SBATCH --ntasks=8
-#SBATCH --output=/home/users/avapps/uas/log.out
+#SBATCH --output=/home/users/avapps/uas/UAS/log.out
 #SBATCH --time=120
-#SBATCH --error=/home/users/avapps/uas/log.err
+#SBATCH --error=/home/users/avapps/uas/UAS/log.err
 
 # Define directories, files and issue date/time
 CODE_DIR=/home/users/avapps/uas/UAS
@@ -14,7 +14,6 @@ export MOG_UK_DIR=/critical/opfc/suites-oper/uk/share/cycle
 export SCRATCH_DIR=/data/scratch/avapps/uas
 export HTML_DIR=/home/users/avapps/public_html/uas
 export URL_START=https://wwwspice/~avapps/uav/html
-export SIDEBAR=${HTML_DIR}/html/sidebar.shtml
 export MASS_DIR=moose:/adhoc/projects/avapps/uav
 
 # Load scitools

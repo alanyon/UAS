@@ -19,7 +19,6 @@ try:
     START_DATE = os.environ['START_DATE']
     START_TIME = os.environ['START_TIME']
     URL_START = os.environ['URL_START']
-    SIDEBAR = os.environ['SIDEBAR']
     MASS_DIR = os.environ['MASS_DIR']
 except KeyError as err:
     raise IOError('Environment variable {} not set.'.format(str(err)))
@@ -30,11 +29,12 @@ MPH_TO_KTS = 0.86897423357831
 
 # ==============================================================================
 # Change these bits for new trial site/date
-TRIAL_SITES = ['Leeming']
-SITE_LATS = [54.2925]
-SITE_LONS = [-1.535556]
-TRIAL_HEIGHTS = [40]  # metres
-FIRST_DTS = [datetime.utcnow().replace(minute=0, second=0, microsecond=0)]  # Year, month, day, hour
+TRIAL_SITES = ['Leeming', 'Waddington']
+SITE_LATS = [54.2925, 53.1725]
+SITE_LONS = [-1.535556, -0.530833]
+TRIAL_HEIGHTS = [40, 70]  # metres
+FIRST_DTS = [datetime.utcnow().replace(minute=0, second=0, microsecond=0),
+             datetime.utcnow().replace(minute=0, second=0, microsecond=0)]  # Year, month, day, hour
 LAST_DTS = [fdt + timedelta(hours=121) for fdt in FIRST_DTS]  # Year, month, day, hour
 # ==============================================================================
 
@@ -351,6 +351,7 @@ def update_html(bd_sites, trial_site, trial_height):
         second_lines = lines[35:54]
         last_lines = lines[54:]
 
+        first_lines[-27] = first_lines[-27].replace('NAME', trial_site)
         first_lines[-1] = first_lines[-1].replace('TRIAL', trial_fname)
         second_lines[14] = second_lines[14].replace('TRIAL', trial_site)
         second_lines[14] = second_lines[14].replace('HEIGHT',
@@ -369,30 +370,11 @@ def update_html(bd_sites, trial_site, trial_height):
         last_lines[21] = last_lines[21].replace('TRIAL', trial_fname)
         last_lines[21] = last_lines[21].replace('NAME', trial_site)
         last_lines[-7] = last_lines[-7].replace('TRIAL', trial_fname)
-        last_lines[-11] = last_lines[-7].replace('SITE', first_site)
+        last_lines[-7] = last_lines[-7].replace('SITE', first_site)
         last_lines[-7] = last_lines[-7].replace('DATE', START_DATE_TIME)
 
         # Concatenate the lists together
         new_lines = first_lines + second_lines + last_lines
-
-        # Add site to sidebar
-        file = open(SIDEBAR, 'r')
-        lines = file.readlines()
-        file.close()
-        first_lines = lines[:-5]
-        last_lines = lines[-5:]
-        url = f'{URL_START}/{trial_fname}_bd_fcasts.shtml'
-        first_lines.append(f'          <li><a href="{url}">{trial_site} '
-                           'Best Data Forecasts</a></li>\n')
-
-        # Concatenate the lists together
-        side_lines = first_lines + last_lines
-
-        # Re-write the lines to a new file
-        file = open(SIDEBAR, 'w')
-        for line in side_lines:
-            file.write(line)
-        file.close()
 
     else:
 

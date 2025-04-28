@@ -11,7 +11,6 @@ export SCRATCH_DIR=/data/scratch/avapps/uas
 export HTML_DIR=/home/users/avapps/public_html/uas
 export DATA_FILE=${CODE_DIR}/Best_Data_sites.nml
 export URL_START=https://wwwspice/~avapps/uav/html
-export SIDEBAR=${HTML_DIR}/html/sidebar.shtml
 export MASS_DIR=moose:/adhoc/projects/avapps/uav
 
 # Load scitools
